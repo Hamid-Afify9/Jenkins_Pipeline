@@ -1,9 +1,8 @@
-# Installing Jenkins on Docker Container on AWS:
+# Integrating Jenkins with GitHub and Applying Git Flow Strategy
 
-This guide details the steps to install Jenkins on a Docker container running on an AWS instance. We'll cover installing Java 11 (a prerequisite) and integrating Jenkins with GitHub using webhooks for streamlined development workflows.
+This guide details the steps to install Jenkins on a Docker container running on an AWS instance. We'll cover installing Java 11 (a prerequisite) and integrating Jenkins with GitHub using webhooks for streamlined development workflows. Additionally, we'll apply the Git Flow strategy for managing our repository.
 
 ## Prerequisites
-
 - An AWS account with access to create EC2 instances.
 - Docker installed on your AWS instance. Refer to the official Docker documentation for installation instructions: [https://docs.docker.com/](https://docs.docker.com/)
 
@@ -33,10 +32,6 @@ This guide details the steps to install Jenkins on a Docker container running on
     ```bash
     docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
     ```
-    Explanation:
-    - `-d`: Runs the container in detached mode (background).
-    - `-p 8080:8080`: Maps the container's port 8080 to the host machine's port 8080, making Jenkins accessible through your browser at http://<your_aws_instance_ip>:8080.
-    - `-v jenkins_home:/var/jenkins_home`: Creates a persistent volume named `jenkins_home` that maps to the `/var/jenkins_home` directory inside the container. This ensures that Jenkins configuration persists even if the container restarts.
 
 4. Wait for Jenkins to Start:
     - It might take a few minutes for Jenkins to initialize. You can check the container logs to see its status:
@@ -100,9 +95,10 @@ This guide details the steps to install Jenkins on a Docker container running on
     git branch --protect main
     ```
 
-12. Push Changes to the Develop Branch :
+12. Push Changes to the Develop Branch:
     - After making changes to your local repository, execute the following command to push the changes to the develop branch:
     ```bash
     git push origin develop
     ```
-- Jenkins docker image
+    - Jenkins should automatically detect the changes and trigger your pipeline. You can monitor the build progress in the Jenkins web interface.
+
